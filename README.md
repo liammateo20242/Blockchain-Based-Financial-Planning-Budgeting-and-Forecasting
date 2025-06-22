@@ -1,79 +1,105 @@
-# Decentralized Operations Maintenance Management System
+# Blockchain-Based Financial Planning System
 
-A blockchain-based maintenance management system built with Clarity smart contracts for the Stacks blockchain. This system provides decentralized management of operations, work orders, preventive maintenance, emergency response, and cost tracking.
+A comprehensive blockchain solution for financial planning, budgeting, and forecasting built on the Stacks blockchain using Clarity smart contracts.
+
+## Overview
+
+This system provides a decentralized platform for financial planning professionals and organizations to manage budgets, analyze variances, create forecasts, and track performance metrics with transparency and immutability.
 
 ## Features
 
-### 🔐 Operations Manager Verification
-- Verify and manage operations managers
-- Role-based access control
-- Manager profile management
+### 🔐 Financial Planner Verification
+- Validates financial planning professionals
+- Manages certifications and credentials
+- Tracks verification status and expiry dates
+- Supports different certification levels
 
-### 📋 Work Order Management
-- Create and assign maintenance work orders
-- Track work order status and progress
-- Priority-based task management
+### 💰 Budget Creation & Management
+- Create organizational budgets with defined periods
+- Categorize budget allocations
+- Track spending against budgeted amounts
+- Support for multiple budgets per organization
 
-### 🔄 Preventive Maintenance
-- Schedule recurring maintenance tasks
-- Automated maintenance due date tracking
-- Equipment-based maintenance planning
+### 📊 Variance Analysis
+- Analyze budget vs actual performance
+- Calculate variance percentages
+- Categorize variances as favorable/unfavorable
+- Generate comprehensive variance reports
 
-### 🚨 Emergency Response
-- Report and manage emergency maintenance requests
-- Severity-based prioritization
-- Real-time emergency assignment and resolution
+### 📈 Forecast Modeling
+- Create financial forecasts with assumptions
+- Model revenue, expense, and profit projections
+- Set confidence levels for predictions
+- Track forecast accuracy over time
 
-### 💰 Cost Tracking
-- Track maintenance expenses and budgets
-- Department-wise budget allocation
-- Real-time budget monitoring
+### 📋 Performance Tracking
+- Define and track KPIs
+- Monitor performance against targets
+- Generate performance reports
+- Rate performance across different metrics
 
 ## Smart Contracts
 
-### 1. Operations Manager Contract (\`operations-manager.clar\`)
-Manages verification and authorization of operations managers.
+### 1. Financial Planner Verification (`financial-planner-verification.clar`)
+Manages the verification and credentials of financial planning professionals.
 
 **Key Functions:**
-- \`verify-manager\`: Add a new verified manager
-- \`revoke-manager\`: Remove manager verification
-- \`is-verified-manager\`: Check manager verification status
+- `verify-planner`: Verify a financial planner with credentials
+- `revoke-verification`: Revoke planner verification
+- `is-verified-planner`: Check if a planner is verified
+- `get-planner-info`: Get planner verification details
 
-### 2. Work Order Contract (\`work-order.clar\`)
-Handles creation and management of maintenance work orders.
-
-**Key Functions:**
-- \`create-work-order\`: Create new work order
-- \`update-work-order-status\`: Update work order status
-- \`get-work-order\`: Retrieve work order details
-
-### 3. Preventive Maintenance Contract (\`preventive-maintenance.clar\`)
-Manages scheduled preventive maintenance tasks.
+### 2. Budget Creation (`budget-creation.clar`)
+Handles the creation and management of organizational budgets.
 
 **Key Functions:**
-- \`create-maintenance-schedule\`: Schedule preventive maintenance
-- \`complete-maintenance\`: Mark maintenance as completed
-- \`is-maintenance-due\`: Check if maintenance is due
+- `create-budget`: Create a new budget for an organization
+- `add-budget-category`: Add spending categories to budgets
+- `update-spent-amount`: Update actual spending amounts
+- `get-budget`: Retrieve budget information
 
-### 4. Emergency Response Contract (\`emergency-response.clar\`)
-Handles emergency maintenance requests and responses.
-
-**Key Functions:**
-- \`report-emergency\`: Report emergency situation
-- \`assign-emergency\`: Assign emergency to responder
-- \`resolve-emergency\`: Mark emergency as resolved
-
-### 5. Cost Tracking Contract (\`cost-tracking.clar\`)
-Tracks maintenance costs and manages budgets.
+### 3. Variance Analysis (`variance-analysis.clar`)
+Analyzes differences between budgeted and actual amounts.
 
 **Key Functions:**
-- \`set-total-budget\`: Set overall budget
-- \`record-expense\`: Record maintenance expense
-- \`get-remaining-budget\`: Check remaining budget
+- `create-variance-analysis`: Start a new variance analysis
+- `add-category-variance`: Add variance data for categories
+- `finalize-analysis`: Complete the variance analysis
+- `calculate-variance-percentage`: Calculate variance percentages
 
-## Installation
+### 4. Forecast Modeling (`forecast-modeling.clar`)
+Creates and manages financial forecasts and projections.
 
-1. Clone the repository
+**Key Functions:**
+- `create-forecast`: Create a new financial forecast
+- `add-forecast-data`: Add forecast data for specific periods
+- `set-forecast-assumptions`: Set underlying assumptions
+- `finalize-forecast`: Finalize the forecast model
+
+### 5. Performance Tracking (`performance-tracking.clar`)
+Tracks and monitors financial performance metrics.
+
+**Key Functions:**
+- `create-performance-metric`: Define new performance metrics
+- `update-metric-value`: Update actual performance values
+- `track-kpi`: Track Key Performance Indicators
+- `generate-performance-report`: Create performance reports
+
+## Getting Started
+
+### Prerequisites
+- Stacks blockchain node
+- Clarity CLI tools
+- Node.js and npm (for testing)
+
+### Installation
+
+1. Clone the repository:
+   \`\`\`bash
+   git clone <repository-url>
+   cd blockchain-financial-planning
+   \`\`\`
+
 2. Install dependencies:
    \`\`\`bash
    npm install
@@ -84,66 +110,90 @@ Tracks maintenance costs and manages budgets.
    npm test
    \`\`\`
 
-## Usage
+### Deployment
 
-### Deploying Contracts
+Deploy contracts to the Stacks blockchain:
 
-Deploy the contracts to the Stacks blockchain in the following order:
-1. \`operations-manager.clar\`
-2. \`work-order.clar\`
-3. \`preventive-maintenance.clar\`
-4. \`emergency-response.clar\`
-5. \`cost-tracking.clar\`
+\`\`\`bash
+# Deploy to testnet
+clarinet deploy --testnet
 
-### Basic Workflow
+# Deploy to mainnet
+clarinet deploy --mainnet
+\`\`\`
 
-1. **Setup**: Deploy contracts and verify operations managers
-2. **Work Orders**: Create work orders for maintenance tasks
-3. **Preventive Maintenance**: Schedule recurring maintenance
-4. **Emergency Response**: Handle urgent maintenance issues
-5. **Cost Tracking**: Monitor expenses and budgets
+## Usage Examples
+
+### Verify a Financial Planner
+\`\`\`clarity
+(contract-call? .financial-planner-verification verify-planner
+'SP1HTBVD3JG9C05J7HBJTHGR0GGW7KX975CN0QKK1
+u3
+"CFP123456"
+"Financial Planning Institute")
+\`\`\`
+
+### Create a Budget
+\`\`\`clarity
+(contract-call? .budget-creation create-budget
+'SP1HTBVD3JG9C05J7HBJTHGR0GGW7KX975CN0QKK1
+"Q1 2024 Budget"
+u1000000
+u1000
+u2000)
+\`\`\`
+
+### Track Performance
+\`\`\`clarity
+(contract-call? .performance-tracking track-kpi
+'SP1HTBVD3JG9C05J7HBJTHGR0GGW7KX975CN0QKK1
+"Revenue Growth"
+u202401
+u100000
+u110000
+"Exceeded target by 10%")
+\`\`\`
+
+## Data Structures
+
+### Budget Structure
+- `name`: Budget name
+- `total-amount`: Total budget amount
+- `period-start/end`: Budget period
+- `created-by`: Creator principal
+- `status`: Current status
+
+### Variance Analysis
+- `variance-amount`: Difference between actual and budgeted
+- `variance-percentage`: Percentage variance
+- `variance-type`: Favorable or Unfavorable
+
+### Performance Metrics
+- `target-value`: Target performance value
+- `actual-value`: Actual achieved value
+- `performance-rating`: Rating based on achievement
+
+## Security Considerations
+
+- All contracts implement proper authorization checks
+- Input validation prevents invalid data entry
+- Read-only functions for safe data access
+- Immutable audit trail for all transactions
 
 ## Testing
 
 The project includes comprehensive tests using Vitest:
 
 \`\`\`bash
+# Run all tests
 npm test
+
+# Run specific test file
+npm test -- budget-creation.test.js
+
+# Run tests in watch mode
+npm run test:watch
 \`\`\`
-
-Tests cover:
-- Contract function calls
-- Error handling
-- Data validation
-- State management
-
-## Error Codes
-
-### Operations Manager Contract
-- \`u100\`: Owner only access
-- \`u101\`: Unauthorized access
-- \`u102\`: Manager already verified
-- \`u103\`: Manager not verified
-
-### Work Order Contract
-- \`u200\`: Unauthorized access
-- \`u201\`: Invalid status
-- \`u202\`: Work order not found
-
-### Preventive Maintenance Contract
-- \`u300\`: Unauthorized access
-- \`u301\`: Schedule not found
-- \`u302\`: Invalid interval
-
-### Emergency Response Contract
-- \`u400\`: Unauthorized access
-- \`u401\`: Emergency not found
-- \`u402\`: Invalid severity
-
-### Cost Tracking Contract
-- \`u500\`: Unauthorized access
-- \`u501\`: Insufficient budget
-- \`u502\`: Invalid amount
 
 ## Contributing
 
@@ -155,18 +205,23 @@ Tests cover:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Security Considerations
+## Support
 
-- All contracts implement proper access controls
-- Input validation is performed on all public functions
-- Budget constraints are enforced in cost tracking
-- Emergency severity levels are validated
+For support and questions:
+- Create an issue in the GitHub repository
+- Contact the development team
+- Check the documentation wiki
 
-## Future Enhancements
+## Roadmap
 
-- Integration with IoT sensors for automated maintenance triggers
-- Mobile app for field technicians
-- Advanced reporting and analytics
-- Integration with external maintenance systems
+- [ ] Integration with external financial data sources
+- [ ] Advanced forecasting algorithms
+- [ ] Multi-signature budget approvals
+- [ ] Real-time performance dashboards
+- [ ] Mobile application interface
+- [ ] Integration with traditional banking systems
+  \`\`\`
+
+Now let's create the PR details file:
